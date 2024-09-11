@@ -12,9 +12,15 @@ class Index extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch("https://www.omdbapi.com/?s=disney"); //TODO add API key
-    const movies = await response.json();
-    this.setState({ movies: movies.Search });
+    try {
+      console.log(process.env.REACT_APP_OMDB_API_KEY);
+      const response = await fetch(`https://www.omdbapi.com/?s=disney&apikey=${process.env.REACT_APP_OMDB_API_KEY}`); //TODO handle possible fetch error
+      const movies = await response.json();
+      this.setState({ movies: movies.Search });
+    }
+    catch (error) {
+      console.error(error);
+    }
   }
 
 
