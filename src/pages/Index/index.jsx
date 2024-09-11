@@ -27,7 +27,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-      <Navbar children={<SearchBar/>} />
+      <Navbar child={<SearchBar/>} />
 
       <div className='container'>
         <h1 className='my-4'>Watch your favorite movies 🍿</h1>
