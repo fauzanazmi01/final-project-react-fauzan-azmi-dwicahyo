@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
     render() {
@@ -6,9 +7,9 @@ export default class Navbar extends Component {
         return (
             <nav className="navbar bg-body-secondary">
                 <div className="container">
-                    <a className="navbar-brand">
+                    <Link to='/' className="navbar-brand">
                         QMovi
-                    </a>
+                    </Link>
                     {child}
                 </div>
             </nav>
