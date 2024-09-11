@@ -19,7 +19,7 @@ function truncate(str, n) {
 const MovieCard = ({ movie  }) => {
     return (
         <Link to={movie.imdbID} className="card text-decoration-none bg-body-secondary">
-            <img className="card-img-top" src={movie.Poster} style={{ height: '400px' }}></img>
+            <img className="card-img-top" src={movie.Poster} style={{ height: '300px' }}></img>
             <div className="card-body" style={{ height: '7em' }}>
                 <h5 className="card-title">{truncate(movie.Title, 55)}</h5>
             </div>
