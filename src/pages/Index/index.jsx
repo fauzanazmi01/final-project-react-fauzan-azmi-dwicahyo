@@ -21,7 +21,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Navbar child={<SearchBar />} />
 
       <div className='container'>
@@ -34,7 +34,7 @@ const Index = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
