@@ -9,7 +9,6 @@ const Index = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        console.log(process.env.REACT_APP_OMDB_API_KEY);
         const response = await fetch(`https://www.omdbapi.com/?s=disney&apikey=${process.env.REACT_APP_OMDB_API_KEY}`);
         const movies = await response.json();
         setMovies(movies.Search);
