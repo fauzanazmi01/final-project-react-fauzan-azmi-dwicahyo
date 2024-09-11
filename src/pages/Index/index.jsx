@@ -26,7 +26,7 @@ const Index = () => {
 
       <div className='container'>
         <h1 className='my-4'>Watch your favorite movies 🍿</h1>
-        <div className='row row-cols-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3'>
+        <div className='row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3'>
           {movies.map((movie, i) => (
             <div key={i} className=''>
               <MovieCard movie={movie} />
