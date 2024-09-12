@@ -6,6 +6,7 @@ export const movieListSlice = createSlice({
         query: ["Star Wars", "Harry Potter", "Marvel", "Superman", "Lord of the Rings"][Math.floor(Math.random() * 5)],
         page: 1,
         movies: [],
+        loadingNextPage: false,
         endOfPage: false
     },
 
@@ -23,6 +24,10 @@ export const movieListSlice = createSlice({
 
         setBottomOfPage: (state) => {
             state.endOfPage = true;
+        },
+
+        toggleLoadingNextPage: (state) => {
+            state.loadingNextPage = !state.loadingNextPage;
         },
 
         setMovieList: (state, action) => {
@@ -52,12 +57,13 @@ export function fetchMovies() {
 
 export function nextPage() {
     return async (dispatch, getState) => {
-        const {endOfPage} = getState().movieList;
-        if (endOfPage) {
+        const {endOfPage, loadingNextPage} = getState().movieList;
+        if (endOfPage || loadingNextPage) {
             return;
         }
 
         dispatch(incrementPage());
+        dispatch(toggleLoadingNextPage());
         const { page, query, movies } = getState().movieList;
         const response = await fetch(`https://www.omdbapi.com/?s=${query}&page=${page}&apikey=${process.env.REACT_APP_OMDB_API_KEY}`);
         const newMovies = await response.json();
@@ -67,8 +73,9 @@ export function nextPage() {
             return;
         }
         dispatch(setMovieList([...movies, ...newMovies.Search]));
+        dispatch(toggleLoadingNextPage());
     }
 }
 
-export const { setSearchQuery, setMovieList, incrementPage, setBottomOfPage } = movieListSlice.actions;
+export const { setSearchQuery, setMovieList, toggleLoadingNextPage, incrementPage, setBottomOfPage } = movieListSlice.actions;
 export default movieListSlice.reducer;
