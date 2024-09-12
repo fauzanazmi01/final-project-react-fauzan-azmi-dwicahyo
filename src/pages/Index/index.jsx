@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar';
 import SearchBar from './SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies, nextPage } from './movieListSlice';
+import Loading from '../../components/Loading';
 
 const Index = () => {
   const movies = useSelector((state) => state.movieList.movies)
@@ -30,13 +31,20 @@ const Index = () => {
 
       <div className='container'>
         <h1 className='my-4'>Watch your favorite movies 🍿</h1>
-        <div className='row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3 mb-5'>
+        {
+          movies.length === 0
+          ?
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+            <Loading />
+          </div>
+          :
+          <div className='row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3 mb-5'>
           {movies.map((movie, i) => (
             <div key={i} className=''>
               <MovieCard movie={movie} />
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </>
   );

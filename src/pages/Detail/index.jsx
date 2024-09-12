@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
-import Loading from './Loading';
+import Loading from '../../components/Loading';
 import MovieDetail from './MovieDetail';
 
 const Detail = () => {
