@@ -1,0 +1,15 @@
+.cardBody {
+    height: 6.75em;
+}
+
+/* iPhone 13 Pro max size */
+@media screen and (max-width: 450px) {
+    .cardBody {
+        padding: 0.75em;
+        height: 6em;
+    }
+
+    .cardBody h5 {
+        font-size: 1em;
+    }
+}

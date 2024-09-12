@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './MovieCard.module.css';
 
 function truncate(str, n) {
     if (str.length <= n) {
@@ -19,9 +20,9 @@ function truncate(str, n) {
 const MovieCard = ({ movie  }) => {
     return (
         <Link to={movie.imdbID} className="card text-decoration-none bg-body-secondary">
-            {movie.Poster != 'N/A' ? <img className="card-img-top" src={movie.Poster} style={{ height: '300px' }}></img> : <div className="d-flex justify-content-center align-items-center bg-secondary" style={{ height: '300px' }}>No Image</div>}
-            <div className="card-body" style={{ height: '7em' }}>
-                <h5 className="card-title">{truncate(movie.Title, 55)}</h5>
+            {movie.Poster !== 'N/A' ? <img src={movie.Poster} alt={`${movie.Title} cover`} style={{ height: '300px', objectFit: 'cover' }}></img> : <div className="d-flex justify-content-center align-items-center text-bg-primary" style={{ height: '300px' }}>No Image</div>}
+            <div className={`card-body ${styles.cardBody}`}>
+                <h5 className="card-title">{truncate(movie.Title, 50)}</h5>
             </div>
         </Link>
     );
