@@ -14,7 +14,7 @@ export default function RatingBox({ rating, votes }) {
     }
 
     return (
-        <div className={`col-4 col-lg-3 p-3 rounded ${containerClass}`}>
+        <div className={`col-4 col-lg-3 p-3 rounded ${containerClass}`} style={{ minWidth: '180px' }}>
             <h3 className='m-0'>Rating</h3>
                 <div>
                     <Star/>
