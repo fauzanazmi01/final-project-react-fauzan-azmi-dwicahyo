@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import MovieCard from './MovieCard';
 import Navbar from '../../components/Navbar';
 import SearchBar from './SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovies } from './movieListSlice';
+import { fetchMovies, nextPage } from './movieListSlice';
 
 const Index = () => {
   const movies = useSelector((state) => state.movieList.movies)
@@ -11,7 +11,18 @@ const Index = () => {
 
   useEffect(() => {
     dispatch(fetchMovies());
-  }, []);
+
+    const handleScroll = () => {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const scrollMax = document.body.offsetHeight;
+  
+      if (scrollPosition >= scrollMax-2) {
+        dispatch(nextPage())
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+  }, [dispatch]);
 
   return (
     <>
