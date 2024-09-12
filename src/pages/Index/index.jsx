@@ -15,8 +15,8 @@ const Index = () => {
     const handleScroll = () => {
       const scrollPosition = window.innerHeight + window.scrollY;
       const scrollMax = document.body.offsetHeight;
-  
-      if (scrollPosition >= scrollMax-2) {
+
+      if (scrollPosition >= scrollMax-768) {
         dispatch(nextPage())
       }
     };
