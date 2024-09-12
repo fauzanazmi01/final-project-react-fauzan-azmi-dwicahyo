@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import Star from './Star';
-import Poster from './Poster';
-import RatingBox from './RatingBox';
-import MetascoreBox from './MetascoreBox';
-import Trophy from './Trophy';
+
+import Loading from './Loading';
+import MovieDetail from './MovieDetail';
 
 const Detail = () => {
   const [movie, setMovie] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-   const fetchMovie = async () => {
+    const fetchMovie = async () => {
       try {
         // const movie = {
         //   "Actors": "Tim Robbins, Morgan Freeman, Bob Gunton",
@@ -59,50 +57,15 @@ const Detail = () => {
   return (
     <>
       <Navbar />
-      <div className='container mt-4'>
-        <div className='row gx-4 mb-2'>
-          <div className='col-12 col-lg-4 col-xxl-3 mb-3 mb-lg-0 d-flex justify-content-center'>
-            <Poster link={movie.Poster}/>
+      {
+        Object.keys(movie).length === 0
+          ?
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+            <Loading />
           </div>
-          <div className='col'>
-            <h1 className='mb-1'>{movie.Title || 'N/A'} <span className='fs-6 fw-light'>{movie.Type}</span></h1>
-            <div className='mb-3'>
-              {movie.Year} | {movie.Rated} | {movie.Runtime}
-            </div>
-            <div className='container mb-3'>
-              <div className='row gap-2 justify-content-center'>
-                <RatingBox rating={movie.imdbRating} votes={movie.imdbVotes}/>
-                {
-                  (movie.Metascore !== 'N/A') && (
-                    <MetascoreBox rating={movie.Metascore} />
-                  )
-                }
-              </div>
-            </div>
-            {movie.Awards != "N/A" && (<div className='alert'>
-              <Trophy /><strong>{movie.Awards}</strong>
-            </div>)}
-            <div className='mb-2'>
-              <h2>Plot</h2>
-              <p className='m-0'>{movie.Plot || 'N/A'}</p>
-            </div>
-            <div className='mb-2'>
-              <h2>Genre</h2>
-              <p>{movie.Genre}</p>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div>
-          <h2 className='d-inline-block' style={{ width: '5em'}}>Actors</h2> {movie.Actors || 'N/A'}
-        </div>
-        <div>
-          <h2 className='d-inline-block' style={{ width: '5em'}}>Director</h2> {movie.Director || 'N/A'}
-        </div>
-        <div>
-          <h2 className='d-inline-block' style={{ width: '5em'}}>Writers</h2> {movie.Writer || 'N/A'}
-        </div>
-      </div>
+          :
+          <MovieDetail movie={movie} />
+      }
     </>
   );
 };
