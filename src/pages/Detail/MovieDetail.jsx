@@ -5,7 +5,7 @@ import Trophy from './Trophy';
 
 export default function MovieDetail({movie}) {
   return (
-    <div className='container mt-4'>
+    <div className='container my-4'>
       <div className='row gx-4 mb-2'>
         <div className='col-12 col-lg-4 col-xxl-3 mb-3 mb-lg-0 d-flex justify-content-center'>
           <Poster link={movie.Poster} />
