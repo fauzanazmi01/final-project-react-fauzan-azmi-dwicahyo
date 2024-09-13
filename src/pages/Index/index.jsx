@@ -46,7 +46,7 @@ const Index = () => {
           ))}
           </div>
         }
-        {!endOfPage && <div class="d-flex justify-content-center align-items-center mb-5"><Loading /></div>}
+        {!endOfPage && <div className="d-flex justify-content-center align-items-center mb-5"><Loading /></div>}
       </div>
     </>
   );
