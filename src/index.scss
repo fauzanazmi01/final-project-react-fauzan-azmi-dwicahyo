@@ -6,3 +6,7 @@ $body-secondary-bg-dark: rgb(52 58 60);
 $body-tertiary-bg-dark: rgb(0 78 93);
 
 @import "bootstrap/scss/bootstrap";
+
+* {
+    font-family: 'Open sans', sans-serif;
+}
