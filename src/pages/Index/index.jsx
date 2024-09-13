@@ -7,7 +7,7 @@ import { fetchMovies, nextPage } from './movieListSlice';
 import Loading from '../../components/Loading';
 
 const Index = () => {
-  const movies = useSelector((state) => state.movieList.movies)
+  const {movies, endOfPage} = useSelector((state) => state.movieList)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -40,11 +40,13 @@ const Index = () => {
           :
           <div className='row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3 mb-5'>
           {movies.map((movie, i) => (
-            <div key={i} className=''>
+            <div key={i} className='col'>
               <MovieCard movie={movie} />
             </div>
           ))}
-        </div>}
+          </div>
+        }
+        {!endOfPage && <div class="d-flex justify-content-center align-items-center mb-5"><Loading /></div>}
       </div>
     </>
   );
