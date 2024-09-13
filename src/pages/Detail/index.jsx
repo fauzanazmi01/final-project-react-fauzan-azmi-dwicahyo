@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
 import Loading from '../../components/Loading';
@@ -8,6 +8,7 @@ import MovieDetail from './MovieDetail';
 const Detail = () => {
   const [movie, setMovie] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -45,9 +46,13 @@ const Detail = () => {
         // };
         const response = await fetch(`https://www.omdbapi.com/?i=${id}&plot=full&apikey=${process.env.REACT_APP_OMDB_API_KEY}`);
         const movie = await response.json();
+        if (!movie.Title) {
+          return navigate("/");
+        }
         setMovie(movie);
       } catch (error) {
         console.error(error);
+        return navigate("/");
       }
     };
 
