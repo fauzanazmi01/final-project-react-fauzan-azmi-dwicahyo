@@ -37,18 +37,12 @@ export const movieListSlice = createSlice({
 });
 
 export function fetchMovies() {
-    return async (dispatch, getState) => {
-        const { query } = getState().movieList;
+    return async (dispatch, getState, extraArgument) => {
+        const { page, query, movies } = getState().movieList;
+        const { movieService, apiKey } = extraArgument;
         try {
-            const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=${process.env.REACT_APP_OMDB_API_KEY}`);
-            const movies = await response.json();
-
-            if (!movies.Search) {
-                console.error("No movies found");
-                return;
-            }
-
-            dispatch(setMovieList(movies.Search));
+            const newMovies = await movieService.getMovies({ query, page, apiKey });
+            dispatch(setMovieList([...movies, ...newMovies]));
         } catch (error) {
             console.error(error);
         }
@@ -56,7 +50,7 @@ export function fetchMovies() {
 }
 
 export function nextPage() {
-    return async (dispatch, getState) => {
+    return async (dispatch, getState, extraArgument) => {
         const {endOfPage, loadingNextPage} = getState().movieList;
         if (endOfPage || loadingNextPage) {
             return;
@@ -65,15 +59,18 @@ export function nextPage() {
         dispatch(incrementPage());
         dispatch(toggleLoadingNextPage());
         const { page, query, movies } = getState().movieList;
-        const response = await fetch(`https://www.omdbapi.com/?s=${query}&page=${page}&apikey=${process.env.REACT_APP_OMDB_API_KEY}`);
-        const newMovies = await response.json();
-
-        if (!newMovies.Search) {
-            dispatch(setBottomOfPage());
-            return;
+        const { movieService, apiKey } = extraArgument;
+        try {
+            const newMovies = await movieService.getMovies({ query, page, apiKey });
+            dispatch(setMovieList([...movies, ...newMovies]));
         }
-        dispatch(setMovieList([...movies, ...newMovies.Search]));
-        dispatch(toggleLoadingNextPage());
+        catch (error) {
+            console.error(error);
+            dispatch(setBottomOfPage());
+        }
+        finally {
+            dispatch(toggleLoadingNextPage());
+        }
     }
 }
 

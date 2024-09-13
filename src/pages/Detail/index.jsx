@@ -4,11 +4,12 @@ import Navbar from '../../components/Navbar';
 
 import Loading from '../../components/Loading';
 import MovieDetail from './MovieDetail';
+import MovieService from '../../services/movieService';
 
 const Detail = () => {
   const [movie, setMovie] = useState({});
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -44,8 +45,7 @@ const Detail = () => {
         //   "imdbRating": "9.3",
         //   "imdbVotes": "2,932,194"
         // };
-        const response = await fetch(`https://www.omdbapi.com/?i=${id}&plot=full&apikey=${process.env.REACT_APP_OMDB_API_KEY}`);
-        const movie = await response.json();
+        const movie = await MovieService.getMovie({ id, apiKey: process.env.REACT_APP_OMDB_API_KEY });
         if (!movie.Title) {
           return navigate("/");
         }
