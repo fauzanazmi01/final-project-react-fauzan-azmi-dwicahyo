@@ -5,7 +5,7 @@ export default class Navbar extends Component {
     render() {
         const { child } = this.props;
         return (
-            <nav className="navbar bg-body-secondary">
+            <nav className="navbar bg-body-tertiary">
                 <div className="container">
                     <Link to='/' className="navbar-brand">
                         QMovi

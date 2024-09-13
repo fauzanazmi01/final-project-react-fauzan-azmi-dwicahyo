@@ -20,7 +20,7 @@ export default function SearchBar() {
   return (
     <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={query} onChange={handleSearchChange}></input>
-        <button className="btn btn-outline-primary" type="submit" onClick={submit}>Search</button>
+        <button className="btn btn-primary" type="submit" onClick={submit}>Search</button>
     </form>
   )
 }
