@@ -1,7 +1,8 @@
-$primary:    rgb(108 94 16);
-$secondary:  rgb(101 94 64);
+$primary:    rgb(0 104 123);
+$secondary:  rgb(75 98 105);
 
-$body-bg: rgb(255 249 236);
-$body-secondary-bg: rgb(233 226 208);
+$body-bg-dark: rgb(15 20 22);
+$body-secondary-bg-dark: rgb(52 58 60);
+$body-tertiary-bg-dark: rgb(0 78 93);
 
 @import "bootstrap/scss/bootstrap";
