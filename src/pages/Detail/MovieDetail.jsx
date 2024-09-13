@@ -25,7 +25,7 @@ export default function MovieDetail({movie}) {
               }
             </div>
           </div>
-          {movie.Awards != "N/A" && (<div className='alert'>
+          {movie.Awards !== "N/A" && (<div className='alert'>
             <Trophy /><strong>{movie.Awards}</strong>
           </div>)}
           <div className='mb-2'>
